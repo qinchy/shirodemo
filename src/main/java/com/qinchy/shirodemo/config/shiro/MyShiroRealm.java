@@ -1,6 +1,6 @@
 package com.qinchy.shirodemo.config.shiro;
 
-import com.qinchy.shirodemo.model.SysFuncs;
+import com.qinchy.shirodemo.model.SysFunc;
 import com.qinchy.shirodemo.model.SysRole;
 import com.qinchy.shirodemo.model.SysUser;
 import com.qinchy.shirodemo.service.ISysUserService;
@@ -45,7 +45,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
         //获取用户的输入的账号.
         String username = (String) token.getPrincipal();
-        System.out.println(token.getCredentials());
+        log.debug(token.getCredentials().toString());
 
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
@@ -70,7 +70,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 userInfo, //用户名
                 userInfo.getPassword(), //密码
-                ByteSource.Util.bytes(""),//salt=username+salt
+                ByteSource.Util.bytes(userInfo.getSalt()),//salt=username+salt
                 getName()  //realm name
         );
 
@@ -134,8 +134,8 @@ public class MyShiroRealm extends AuthorizingRealm {
 //            info.addStringPermissions(role.getPermissionsName());
 //        }
         for (SysRole role : userInfo.getRoles()) {
-            authorizationInfo.addRole(role.getName());
-            for (SysFuncs p : role.getFuncs()) {
+            authorizationInfo.addRole(role.getRoleName());
+            for (SysFunc p : role.getFuncs()) {
                 authorizationInfo.addStringPermission(p.getPermission());
             }
         }

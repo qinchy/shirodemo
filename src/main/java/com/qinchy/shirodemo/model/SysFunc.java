@@ -8,7 +8,7 @@ import java.util.List;
  * @author Administrator
  */
 @Entity
-public class SysFuncs implements Serializable {
+public class SysFunc implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class SysFuncs implements Serializable {
     /**
      * 名称
      */
-    private String name;
+    private String funcName;
 
     @Column(columnDefinition = "enum('menu','button')")
     /**
@@ -56,7 +56,6 @@ public class SysFuncs implements Serializable {
     @JoinTable(name = "Sys_Role_funcs", joinColumns = {@JoinColumn(name = "func_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<SysRole> roles;
 
-
     public Long getFuncId() {
         return funcId;
     }
@@ -65,12 +64,12 @@ public class SysFuncs implements Serializable {
         this.funcId = funcId;
     }
 
-    public String getName() {
-        return name;
+    public String getFuncName() {
+        return funcName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFuncName(String funcName) {
+        this.funcName = funcName;
     }
 
     public String getResourceType() {
@@ -131,9 +130,9 @@ public class SysFuncs implements Serializable {
 
     @Override
     public String toString() {
-        return "SysFuncs{" +
+        return "SysFunc{" +
                 "funcId=" + funcId +
-                ", name='" + name + '\'' +
+                ", funcName='" + funcName + '\'' +
                 ", resourceType='" + resourceType + '\'' +
                 ", url='" + url + '\'' +
                 ", permission='" + permission + '\'' +
