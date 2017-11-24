@@ -42,13 +42,6 @@ public class SysRole implements Serializable {
     @JoinTable(name = "Sys_Role_funcs", joinColumns = {@JoinColumn(name = "role_id")}, inverseJoinColumns = {@JoinColumn(name = "func_id")})
     private List<SysFunc> funcs;
 
-    /**
-     * 用户<->角色关系定义; 一个角色对应多个用户
-     */
-    @ManyToMany
-    @JoinTable(name = "Sys_User_Roles", joinColumns = {@JoinColumn(name = "role_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private List<SysUser> users;
-
     public Long getRoleId() {
         return roleId;
     }
@@ -89,14 +82,6 @@ public class SysRole implements Serializable {
         this.funcs = funcs;
     }
 
-    public List<SysUser> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<SysUser> users) {
-        this.users = users;
-    }
-
     @Override
     public String toString() {
         return "SysRole{" +
@@ -105,7 +90,6 @@ public class SysRole implements Serializable {
                 ", description='" + description + '\'' +
                 ", available=" + available +
                 ", funcs=" + funcs +
-                ", users=" + users +
                 '}';
     }
 }

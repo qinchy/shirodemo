@@ -20,7 +20,7 @@ public class HomeController {
     }
 
     // 登录提交地址和applicationontext-shiro.xml配置的loginurl一致。 (配置文件方式的说法)
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     public String login(HttpServletRequest request, Map<String, Object> map) throws Exception {
         System.out.println("HomeController.login()");
         // 登录失败从request中获取shiro处理的异常信息。

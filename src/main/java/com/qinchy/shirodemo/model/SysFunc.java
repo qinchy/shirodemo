@@ -52,10 +52,6 @@ public class SysFunc implements Serializable {
 
     private Boolean available = Boolean.FALSE;
 
-    @ManyToMany
-    @JoinTable(name = "Sys_Role_funcs", joinColumns = {@JoinColumn(name = "func_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private List<SysRole> roles;
-
     public Long getFuncId() {
         return funcId;
     }
@@ -120,14 +116,6 @@ public class SysFunc implements Serializable {
         this.available = available;
     }
 
-    public List<SysRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public String toString() {
         return "SysFunc{" +
@@ -139,7 +127,6 @@ public class SysFunc implements Serializable {
                 ", parentId=" + parentId +
                 ", parentIds='" + parentIds + '\'' +
                 ", available=" + available +
-                ", roles=" + roles +
                 '}';
     }
 }
